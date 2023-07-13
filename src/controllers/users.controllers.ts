@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { createUserService } from "../services/users/user.create.service";
 import { listUserService } from "../services/users/user.list.service";
-import { destroyUserService } from "../services/users/destroy.update.service";
+import { destroyUserService } from "../services/users/user.destroy.service";
 import { updateUserService } from "../services/users/user.update.service";
 import { retrieveUserService } from "../services/users/user.retrieve.service";
 
