@@ -14,6 +14,14 @@ export const userCreateController = async (
   return res.status(201).json(newUser);
 };
 
+export const userPictureController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { location, etag } = req.file;
+  return res.status(201).send({ location, etag });
+};
+
 export const userListController = async (
   req: Request,
   res: Response
