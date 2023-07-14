@@ -12,4 +12,4 @@ export const userUpdateSchema = userSchema.partial();
 
 export const userReturnSchema = userSchema
   .omit({ password: true })
-  .extend({ id: z.string() });
+  .extend({ id: z.string(), scores: z.array(z.number()).optional() });
