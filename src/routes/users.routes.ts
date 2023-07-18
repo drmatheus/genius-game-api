@@ -29,7 +29,7 @@ userRoutes.post(
   userCreateController
 );
 userRoutes.get("/:id", verifyUserId, userRetrieveController);
-userRoutes.get("/", userListController);
+userRoutes.get("/", verifyToken, userListController);
 userRoutes.delete(
   "/:id",
   verifyToken,

@@ -39,7 +39,7 @@ export const multerConfig = {
   dest: path.resolve("src", "temp", "images"),
   storage: storageTypes.s3,
   limits: {
-    fileSize: 1 * 1024 * 1024,
+    fileSize: 3 * 1024 * 1024,
   },
   fileFilter: (req: Request, file: any, callback: any) => {
     const allowedMimes = ["image/jpeg", "image/pjpeg", "image/png"];
