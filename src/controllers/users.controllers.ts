@@ -39,6 +39,14 @@ export const userRetrieveController = async (
   return res.status(200).json(user);
 };
 
+export const userLoggedRetrieveController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const user = await retrieveUserService(res.locals.tokenData.sub);
+  return res.status(200).json(user);
+};
+
 export const userDestroyController = async (
   req: Request,
   res: Response

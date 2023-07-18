@@ -7,8 +7,10 @@ export const retriveScoreService = async (): Promise<any> => {
     {
       $group: {
         _id: "$_id",
-        name: { $first: "$name" },
+        name: { $first: "$nickname" },
+        picture: { $first: "$picture" },
         highestScore: { $first: "$scores" },
+        timesPlayed: { $sum: 1 },
       },
     },
     { $sort: { highestScore: -1 } },
