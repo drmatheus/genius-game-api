@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scoreRoutes = void 0;
+const express_1 = require("express");
+const verifyBody_middleware_1 = require("../middlewares/verifyBody.middleware");
+const score_schema_1 = require("../schemas/score.schema");
+const score_controllers_1 = require("../controllers/score.controllers");
+const verifyToken_middleware_1 = require("../middlewares/verifyToken.middleware");
+exports.scoreRoutes = (0, express_1.Router)();
+exports.scoreRoutes.post("/", verifyToken_middleware_1.verifyToken, (0, verifyBody_middleware_1.verifyBody)(score_schema_1.scoreSchema), score_controllers_1.scoreCreateController);
+exports.scoreRoutes.get("/", score_controllers_1.scoreRetrieveController);

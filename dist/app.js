@@ -1,0 +1,32 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const error_1 = require("./error");
+require("express-async-errors");
+const routes_1 = require("./routes");
+const morgan_1 = __importDefault(require("morgan"));
+require("dotenv/config");
+const score_routes_1 = require("./routes/score.routes");
+const profile_routes_1 = require("./routes/profile.routes");
+const app = (0, express_1.default)();
+app.use(express_1.default.json({ limit: "10mb" }));
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, morgan_1.default)("dev"));
+const cors = require("cors");
+app.use(express_1.default.json());
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "*");
+    next();
+});
+app.use(cors());
+app.use("/profile", profile_routes_1.profileRoutes);
+app.use("/users", routes_1.userRoutes);
+app.use("/login", routes_1.loginRoutes);
+app.use("/scores", score_routes_1.scoreRoutes);
+app.use(error_1.handleErrors);
+exports.default = app;

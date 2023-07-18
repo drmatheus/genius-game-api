@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRoutes = void 0;
+const express_1 = require("express");
+const users_controllers_1 = require("../controllers/users.controllers");
+const users_schema_1 = require("../schemas/users.schema");
+const verifyBody_middleware_1 = require("../middlewares/verifyBody.middleware");
+const verifyUserId_middleware_1 = require("../middlewares/verifyUserId.middleware");
+const verifyToken_middleware_1 = require("../middlewares/verifyToken.middleware");
+const verifyIsAdminOrHimself_middleware_1 = require("../middlewares/verifyIsAdminOrHimself.middleware");
+const verifyEmailAndNickname_middleware_1 = require("../middlewares/verifyEmailAndNickname.middleware");
+const multer_1 = __importDefault(require("multer"));
+const multer_2 = require("../config/multer");
+exports.userRoutes = (0, express_1.Router)();
+exports.userRoutes.post("/picture", (0, multer_1.default)(multer_2.multerConfig).single("file"), users_controllers_1.userPictureController);
+exports.userRoutes.post("/", (0, verifyBody_middleware_1.verifyBody)(users_schema_1.userSchema), verifyEmailAndNickname_middleware_1.verifyEmailAndNickname, users_controllers_1.userCreateController);
+exports.userRoutes.get("/:id", verifyUserId_middleware_1.verifyUserId, users_controllers_1.userRetrieveController);
+exports.userRoutes.get("/", verifyToken_middleware_1.verifyToken, users_controllers_1.userListController);
+exports.userRoutes.delete("/:id", verifyToken_middleware_1.verifyToken, verifyIsAdminOrHimself_middleware_1.verifyIsAdminOrHimself, verifyUserId_middleware_1.verifyUserId, users_controllers_1.userDestroyController);
+exports.userRoutes.patch("/:id", verifyToken_middleware_1.verifyToken, verifyIsAdminOrHimself_middleware_1.verifyIsAdminOrHimself, verifyEmailAndNickname_middleware_1.verifyEmailAndNickname, (0, verifyBody_middleware_1.verifyBody)(users_schema_1.userUpdateSchema), users_controllers_1.userUpdateController);
