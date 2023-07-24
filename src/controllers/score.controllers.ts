@@ -18,5 +18,5 @@ export const scoreRetrieveController = async (
   res: Response
 ): Promise<Response> => {
   const userScores = await retriveScoreService();
-  return res.status(201).json(userScores);
+  return res.status(200).json(userScores);
 };

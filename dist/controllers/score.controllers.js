@@ -19,6 +19,6 @@ const scoreCreateController = (req, res) => __awaiter(void 0, void 0, void 0, fu
 exports.scoreCreateController = scoreCreateController;
 const scoreRetrieveController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userScores = yield (0, score_retrive_service_1.retriveScoreService)();
-    return res.status(201).json(userScores);
+    return res.status(200).json(userScores);
 });
 exports.scoreRetrieveController = scoreRetrieveController;
